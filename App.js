@@ -7,49 +7,55 @@
  */
 
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import {StyleSheet, Text, View, ScrollView } from 'react-native';
 
 export default function App() {
-  const [name, setName] = useState('Yash');
-  const [age, setAge] = useState(10);
-
+    const [people,setPeople] = useState([
+      { name : 'Rupesh' , key:1},
+      { name : 'Sagar' , key:2},
+      { name : 'Nikita' , key:3},
+      { name : 'Prashant' , key:4},
+      { name : 'Niranjan' , key:5},
+      { name : 'Madhura' , key:6},
+      { name : 'Aryaa' , key:7},
+      { name : 'Ronaldo', key:8}
+    ])
 
   return (
     <View style={styles.container}>
 
-      <Text>Enter Name:</Text>
-      <TextInput style={styles.input}
-                 placeholder="e.g.Indira"
-                 keyboardType='text'
-                 onChangeText={(val) => setName(val)}/>
+      <ScrollView>
+      {
+        people.map((item) =>  (
+            <View style={styles.item} key={item.key}>
+               <Text style={styles.itemText}>{item.name}</Text>
+             </View>
+          )
+        )
+      }
+    </ScrollView>
       
-      <Text>Enter Age:</Text>
-      <TextInput style={styles.input}
-                 placeholder="e.g.20" 
-                 keyboardType='numeric'
-                 onChangeText={(val) => setAge(val)} />
-      <Text>
-        Name : {name} Age : {age}
-      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  btnContainer: {
-    marginTop: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#777',
-    padding: 8,
-    margin: 10,
-    width: 200,
-  },
+   container: {
+     flex: 1,
+     backgroundColor:'#fff',
+     paddingTop: 20,
+     paddingHorizontal: 20
+   },
+   item: {
+     padding: 30,
+     marginTop: 30,
+     backgroundColor: 'orange',
+     fontSize: 50,
+     color: 'white',
+     borderRadius: 10
+   },
+   itemText: {
+     color: 'white',
+     fontWeight: 'bold'
+   }
 });
