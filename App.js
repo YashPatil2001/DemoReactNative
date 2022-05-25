@@ -6,20 +6,33 @@
  * @flow strict-local
  */
 
- import React from 'react';
- import { StyleSheet, Text, View } from 'react-native';
+ import React,{useState} from 'react';
+ import { StyleSheet, Text, View, Button} from 'react-native';
  
  export default function App() {
+   const [name,setName] = useState('Yash')
+   const [person,setPerson] = useState({ name:'Dip Patil' , age:20})
+   
+
+  const onUpdate = () => {
+     setName('Madhu')
+   }
+ 
+ const onUpdatePerson = () => {
+   setPerson({
+     name: 'Aryaa',
+     age: '30'
+   })
+ }  
    return (
      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.boldText}>Hello React</Text>
+        <Text>My Name is {name}</Text>
+        <Text>Hist Name is {person.name} and his age is {person.age}</Text>
+        <View style={styles.btnContainer}>
+           <Button title='Update name' onPress={onUpdate}/>
         </View>
-        <View style={styles.body}>
-          <Text style={styles.body}>hey learning react...<Text >make it bold</Text></Text>
-          <Text>hey learning react...</Text>
-          <Text>hey learning react...</Text>
-          <Text>hey learning react...</Text>
+        <View style={styles.btnContainer}>
+           <Button title='Set person' onPress={onUpdatePerson}/>
         </View>
      </View>
    );
@@ -32,16 +45,7 @@
      alignItems: 'center',
      justifyContent: 'center',
    },
-   header: {
-     backgroundColor: 'red',
-     padding: 20
-   },
-   boldText: {
-     fontWeight: 'bold',
-     color:'white'
-   },
-   body: {
-     backgroundColor: 'yellow',
-     padding:20,
+   btnContainer: {
+       marginTop: 20
    }
  });
