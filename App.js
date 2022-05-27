@@ -7,33 +7,44 @@
  */
 
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, ScrollView } from 'react-native';
+import {StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
 
 export default function App() {
     const [people,setPeople] = useState([
-      { name : 'Rupesh' , key:1},
-      { name : 'Sagar' , key:2},
-      { name : 'Nikita' , key:3},
-      { name : 'Prashant' , key:4},
-      { name : 'Niranjan' , key:5},
-      { name : 'Madhura' , key:6},
-      { name : 'Aryaa' , key:7},
-      { name : 'Ronaldo', key:8}
+      { name : 'Rupesh' , ID:1},
+      { name : 'Sagar' , ID:2},
+      { name : 'Nikita' , ID:3},
+      { name : 'Prashant' , ID:4},
+      { name : 'Niranjan' , ID:5},
+      { name : 'Madhura' , ID:6},
+      { name : 'Aryaa' , ID:7},
+      { name : 'Ronaldo', ID:8}
     ])
 
   return (
     <View style={styles.container}>
 
-      <ScrollView>
+    <FlatList 
+      //  numColumns={2}
+       keyExtractor={ (item) => item.ID}
+       data={people}
+       renderItem={({ item }) => (
+        <View style={styles.item} key={item.key}>
+               <Text style={styles.itemText}>{item.name}</Text>
+             </View>
+       )}
+     />
+
+     {/* <ScrollView>
       {
-        people.map((item) =>  (
+        people.map(item =>  (
             <View style={styles.item} key={item.key}>
                <Text style={styles.itemText}>{item.name}</Text>
              </View>
           )
         )
       }
-    </ScrollView>
+    </ScrollView>*/}
       
     </View>
   );
@@ -43,7 +54,7 @@ const styles = StyleSheet.create({
    container: {
      flex: 1,
      backgroundColor:'#fff',
-     paddingTop: 20,
+     paddingTop: 10,
      paddingHorizontal: 20
    },
    item: {
@@ -52,10 +63,11 @@ const styles = StyleSheet.create({
      backgroundColor: 'orange',
      fontSize: 50,
      color: 'white',
-     borderRadius: 10
+     borderRadius: 5,
    },
    itemText: {
      color: 'white',
-     fontWeight: 'bold'
+     fontWeight: 'bold',
+
    }
 });
