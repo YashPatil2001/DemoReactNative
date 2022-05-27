@@ -7,7 +7,7 @@
  */
 
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
+import {StyleSheet, Text, View, FlatList,TouchableOpacity } from 'react-native';
 
 export default function App() {
     const [people,setPeople] = useState([
@@ -21,6 +21,14 @@ export default function App() {
       { name : 'Ronaldo', ID:8}
     ])
 
+    const pressHandler = (item) => {
+      // let name = people.filter((person => person.ID === id))[0].name
+      alert(item.name);
+      // setPeople( (prevPeople) => {
+      //    return prevPeople.filter( people => people.ID != item.ID)
+      // })
+    }
+
   return (
     <View style={styles.container}>
 
@@ -29,9 +37,12 @@ export default function App() {
        keyExtractor={ (item) => item.ID}
        data={people}
        renderItem={({ item }) => (
-        <View style={styles.item} key={item.key}>
-               <Text style={styles.itemText}>{item.name}</Text>
+         <TouchableOpacity onPress={ () => pressHandler(item)}>
+             <View style={styles.item} key={item.key}>
+                <Text style={styles.itemText}>{item.name}</Text>
              </View>
+         </TouchableOpacity>
+     
        )}
      />
 
